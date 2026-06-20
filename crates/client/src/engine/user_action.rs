@@ -73,6 +73,12 @@ impl TryFrom<usize> for UserAction {
 
             0xF3 | 0xF4 => UserAction::ToggleInputMode, // Zenkaku/Hankaku
 
+            // ▼ 追加した部分（ここが正しい位置です） ▼
+            0x41..=0x5A if VK_SHIFT.is_pressed() => {
+                UserAction::Unknown
+            }
+            // ▲ ここまで ▲
+
             _ => {
                 let key_state = {
                     let mut key_state = [0u8; 256];
